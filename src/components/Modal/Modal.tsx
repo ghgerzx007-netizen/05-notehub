@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import css from "./Modal.module.css";
 import { useEffect } from "react";
 
@@ -23,7 +24,9 @@ function Modal({
     return null;
   }
 
-  return (
+  const portalRoot = document.getElementById("modal-root");
+  if (!portalRoot) return null;
+  return createPortal(
     <div
       onClick={onClose}
       className={css.backdrop}
@@ -33,8 +36,8 @@ function Modal({
       <div onClick={(e) => e.stopPropagation()} className={css.modal}>
         {children}
       </div>
-    </div>
+    </div>,
+    portalRoot,
   );
 }
-
 export default Modal;

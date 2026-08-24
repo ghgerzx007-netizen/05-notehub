@@ -11,6 +11,7 @@ import Paginate from "../Pagination/Pagination.tsx";
 
 
 
+
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
   const [page, setPage] = useState(1);

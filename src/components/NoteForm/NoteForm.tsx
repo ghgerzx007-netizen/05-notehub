@@ -3,8 +3,10 @@ import * as Yup from "yup";
 import { Formik, Field, ErrorMessage } from "formik";
 import { createNote } from "../../services/noteService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-export default function NoteForm({ onClose }: { onClose: () => void }) {
+interface NoteFormProps {
+  onClose: () => void;
+}
+export default function NoteForm({ onClose }: NoteFormProps) {
   const Tags = ["Todo", "Work", "Personal", "Meeting", "Shopping"] as const;
   type Tag = (typeof Tags)[number];
   const queryClient = useQueryClient();
