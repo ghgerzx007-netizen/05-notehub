@@ -4,7 +4,7 @@ import NoteForm from "../NoteForm/NoteForm.tsx";
 import ReactPaginateModule from "react-paginate";
 import type { ReactPaginateProps } from "react-paginate";
 import type { ComponentType } from "react";
-import { fetchNotes } from "../services/noteService.ts";
+import { fetchNotes } from "../../services/noteService.ts";
 import { useQuery } from "@tanstack/react-query";
 import NoteList from "../NoteList/NoteList.tsx";
 import SearchBox from "../SearchBox/SearchBox.tsx";

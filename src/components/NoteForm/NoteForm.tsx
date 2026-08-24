@@ -1,7 +1,7 @@
 import css from "./NoteForm.module.css";
 import * as Yup from "yup";
 import { Formik, Field, ErrorMessage } from "formik";
-import { createNote } from "../services/noteService";
+import { createNote } from "../../services/noteService";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function NoteForm({ onClose }: { onClose: () => void }) {

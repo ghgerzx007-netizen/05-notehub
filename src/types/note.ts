@@ -1,4 +1,3 @@
-
 export type NoteTag = "Todo" | "Work" | "Personal" | "Meeting" | "Shopping";
 export interface Note {
   id: string;
@@ -7,14 +6,13 @@ export interface Note {
   createdAt: string;
   updatedAt: string;
   tag: NoteTag;
-  
 }
-export  interface FetchNotesResponse{
+export interface FetchNotesResponse {
   notes: Note[];
   totalPages: number;
 }
- export type CreateNotePayload = {
+export type CreateNotePayload = {
   title: string;
   content: string;
   tag: NoteTag;
-}
+};

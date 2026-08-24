@@ -1,7 +1,7 @@
 import axios from "axios";
-import type { CreateNotePayload } from "../types/note.ts";
-import type { FetchNotesResponse } from "../types/note.ts";
-import type { Note } from "../types/note.ts";
+import type { CreateNotePayload } from ".././types/note.ts";
+import type { FetchNotesResponse } from ".././types/note.ts";
+import type { Note } from ".././types/note.ts";
 interface NotesParams {
   perPage?: number;
   page?: number;
