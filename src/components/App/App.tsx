@@ -17,6 +17,11 @@ export default function App() {
   const [page, setPage] = useState(1);
   const [searchValue, setSearchValue] = useState("");
   const [debouncedSearchValue] = useDebounce(searchValue, 300);
+  const handleSearch = (value: string) => {
+    setSearchValue(value);
+    setPage(1);
+  }
+  
   const {
     data: fetchNotesResponse,
     isLoading,
@@ -25,6 +30,7 @@ export default function App() {
     queryKey: ["notes", page, debouncedSearchValue],
     queryFn: () => fetchNotes(page, debouncedSearchValue),
     placeholderData: keepPreviousData,
+    
   });
   if (isLoading) {
     return <div>Loading...</div>;
@@ -40,7 +46,7 @@ export default function App() {
     <>
       <div className={css.app} >
         <header className={css.toolbar}>
-          <SearchBox searchValue={searchValue} onSearch={setSearchValue}   />
+          <SearchBox searchValue={searchValue} onSearch={handleSearch}  />
           {!isLoading && !isError && totalPages > 1 && (
             <Paginate totalPages={ totalPages } page={page} setPage={setPage} />
           )}
