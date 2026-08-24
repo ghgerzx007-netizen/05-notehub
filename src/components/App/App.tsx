@@ -1,23 +1,15 @@
 import { useState } from "react";
 import css from "../App/App.module.css";
 import NoteForm from "../NoteForm/NoteForm.tsx";
-import ReactPaginateModule from "react-paginate";
-import type { ReactPaginateProps } from "react-paginate";
-import type { ComponentType } from "react";
 import { fetchNotes } from "../../services/noteService.ts";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import NoteList from "../NoteList/NoteList.tsx";
 import SearchBox from "../SearchBox/SearchBox.tsx";
 import Modal from "../Modal/Modal.tsx";
 import { useDebounce } from "use-debounce";
+import Paginate from "../Pagination/Pagination.tsx";
 
 
-type ModuleWithDefault<T> = { default: T };
-const ReactPaginate = (
-  ReactPaginateModule as unknown as ModuleWithDefault<
-    ComponentType<ReactPaginateProps>
-  >
-).default;
 
 export default function App() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,6 +23,7 @@ export default function App() {
   } = useQuery({
     queryKey: ["notes", page, debouncedSearchValue],
     queryFn: () => fetchNotes(page, debouncedSearchValue),
+    placeholderData: keepPreviousData,
   });
   if (isLoading) {
     return <div>Loading...</div>;
@@ -48,17 +41,7 @@ export default function App() {
         <header className={css.toolbar}>
           <SearchBox searchValue={searchValue} onSearch={setSearchValue}   />
           {!isLoading && !isError && totalPages > 1 && (
-            <ReactPaginate 
-              pageCount={totalPages} 
-              pageRangeDisplayed={5}
-              marginPagesDisplayed={1}
-              onPageChange={({ selected }) => setPage(selected + 1)}
-              forcePage={page - 1}
-              containerClassName={css.pagination}
-              activeClassName={css.active}
-              nextLabel="→" className={css.next}
-              previousLabel="←" 
-            />
+            <Paginate totalPages={ totalPages } page={page} setPage={setPage} />
           )}
           <button onClick={() => setIsOpen(true)} className={css.button}>
             Create note +
